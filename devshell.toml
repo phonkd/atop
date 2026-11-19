@@ -1,0 +1,18 @@
+[devshell]
+name = "atop"
+
+# The Android SDK, JDK and Gradle are wired up in flake.nix (they need Nix
+# expressions, not just attribute names).
+packages = []
+
+[[commands]]
+name = "build"
+help = "Build the debug APK"
+category = "android"
+command = "gradle --project-dir \"$PRJ_ROOT\" assembleDebug \"$@\""
+
+[[commands]]
+name = "deploy"
+help = "Build, install and launch on the connected device"
+category = "android"
+command = "gradle --project-dir \"$PRJ_ROOT\" installDebug \"$@\" && adb shell am start -n dev.phonkd.atop/.MainActivity"
